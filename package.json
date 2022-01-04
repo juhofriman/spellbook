@@ -1,0 +1,15 @@
+{
+  "name": "spellbook",
+  "version": "0.0.1",
+  "description": "Proto thing",
+  "main": "index.js",
+  "repository": "git@github.com:juhofriman/spellbook.git",
+  "author": "Juho Friman <juho.t.friman@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^16.0.6"
+  }
+}
