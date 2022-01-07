@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
+
+@font-face {
+  font-family: 'Nautigal';
+  src: url(../fonts/TheNautigal-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Dm';
+  src: url(../fonts/Orbitron-VariableFont_wght.ttf);
+}
+
 @tailwind utilities;
