@@ -5,12 +5,17 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="dist/output.css" rel="stylesheet">
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <div class="font-sans p-2">
+      <h1 class="text-3xl mb-6">Typography</h1>
+      <p class="mb-4">This is a paragraph.</p>
+      <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula ullamcorper lorem ut congue. Sed finibus pretium mattis. Nunc finibus hendrerit massa, eu porta purus porttitor eu. Suspendisse scelerisque sed lacus nec gravida. Morbi ipsum ligula, lobortis vel libero eget, finibus imperdiet neque. Aliquam vel justo efficitur, lacinia velit in, tristique lacus. Suspendisse magna lectus, tincidunt ac est quis, dignissim sodales leo. Nunc sit amet sem tempus odio ultrices finibus ut non metus. Proin maximus, nunc non laoreet mollis, enim erat ultrices purus, vitae euismod nisi ante id arcu. Sed pellentesque ligula vel odio interdum, in vulputate leo fringilla. Pellentesque placerat lectus vitae viverra aliquam. Praesent rhoncus pellentesque diam. Morbi pulvinar, urna id tempor ornare, lacus felis maximus ex, eget ornare risus nibh ut leo. Integer id nulla rutrum, maximus arcu vitae, luctus urna. Duis luctus gravida semper.</p>
+      <h2 class="text-3xl mb-6">Second level header</h2>
+      <p class="mb-4">This is a paragraph.</p>
+    </div>
   </body>
 </html>
