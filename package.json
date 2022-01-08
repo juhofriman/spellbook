@@ -1,21 +1,23 @@
 {
   "name": "spellbook",
   "version": "0.0.1",
-  "description": "Proto thing",
+  "description": "Yet another markdown notebook",
   "main": "index.js",
   "repository": "git@github.com:juhofriman/spellbook.git",
   "author": "Juho Friman <juho.t.friman@gmail.com>",
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist",
-    "dev": "electron ./dist",
-    "webpack:watch": "yarn clean && webpack --watch",
-    "css:tw": "tailwindcss",
+    "dev": "yarn build && concurrently \"yarn css:watch\" \"yarn webpack:watch\" \"electron ./dist\"",
+    "build": "yarn clean && yarn webpack:build && yarn css:compile",
+    "webpack:build": "webpack",
+    "webpack:watch": "webpack --watch",
     "css:compile": "tailwindcss -i ./css/spellbook.css -o ./dist/output.css",
     "css:watch": "tailwindcss --watch -i ./css/spellbook.css -o ./dist/output.css"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.1",
+    "concurrently": "^7.0.0",
     "copy-webpack-plugin": "^10.2.0",
     "electron": "^16.0.6",
     "postcss": "^8.4.5",
