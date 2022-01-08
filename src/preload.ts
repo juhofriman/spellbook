@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
+  const replaceText = (selector: string, text: string | undefined) => {
     const element = document.getElementById(selector)
-    if (element) element.innerText = text
+    if (element) element.innerText = text || 'not available'
   }
 
   for (const dependency of ['chrome', 'node', 'electron']) {

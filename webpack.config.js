@@ -7,10 +7,22 @@ const outputPath = path.resolve(__dirname, 'dist')
 const mainConfig = {
   mode,
   target: 'electron-main',
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: outputPath,
     filename: 'index.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new CopyPlugin({
@@ -24,7 +36,19 @@ const mainConfig = {
 const rendererConfig = {
   mode,
   target: 'electron-renderer',
-  entry: './src/preload.js',
+  entry: './src/preload.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   output: {
     path: outputPath,
     filename: 'preload.js'
