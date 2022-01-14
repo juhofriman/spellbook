@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Dm'],
-        'handwritten': ['Nautigal']
+        // 'sans': ['Dm'],
+        // 'handwritten': ['Nautigal']
       }
     },
   },

@@ -1,68 +1,62 @@
-import { Button } from './components/button'
-import { Text } from './components/text'
-import { create_eb } from './eb/eb';
+import { Button } from './components/Button'
+import { TextBlock } from './components/TextBlock'
+import { TextInput } from './components/TextInput'
+import { renderComponents } from './render'
 
-export const eb = create_eb()
 
-const components = [
-  {
-    mount: 'buttons',
-    component: Button.init({
-      value: 'Increase',
-      onClick: () => {
-        eb.change('VALUE', (old) => old + 1)
-      }
-    }),
-  },
-  {
-    mount: 'buttons',
-    component: Button.init({
-      value: 'Decrease',
-      onClick: () => {
-        eb.change('VALUE', (old) => old - 1)
-      }
-    }),
-  },
-  {
-    mount: 'buttons',
-    component: Button.init({
-      value: 'Reset',
-      onClick: () => {
-        eb.change('VALUE', (_) => 0)
-      }
-    }),
-  },
-  {
-    mount: 'value',
-    component: Text.init({
-      subscribe: 'VALUE',
-      render: (value) => `Value is ${value} and you friggin' rule!`,
-    }),
-  },
-  {
-    mount: 'value',
-    component: Text.init({
-      subscribe: 'CHROMIUM_VERSION',
-      render: (value) => `Chromium version is ${value}`,
-    }),
-  },
-  {
-    mount: 'value',
-    component: Text.init({
-      subscribe: 'ELECTRON_VERSION',
-      render: (value) => `Electron version is ${value}`,
-    }),
-  },
-]
 
-// render application
-window.addEventListener('DOMContentLoaded', () => {
-  components.forEach(({ mount, component }) => {
-    document.getElementById(mount)?.appendChild(component.node)
-  })
+renderComponents({
+  stateHook: (eb) => {
+    eb.store('fancyAppNameVersion', '0.23.41-alpha-1')
+    eb.store('todoItems', [])
+    eb.store('newTodo', '')
+  }, 
+  components: [
+    {
+      mount: 'version-number',
+      init: (eb) => TextBlock({
+        eb,
+        listen: ['fancyAppNameVersion'],
+        content: ({ fancyAppNameVersion }) => `Version ${fancyAppNameVersion}`
+      })
+    },
+    {
+      mount: 'todo-form',
+      init: (eb) => TextInput({
+        eb,
+        key: 'newTodo'
+      })
+    },
+    {
+      mount: 'todo-form',
+      init: (eb) => Button({
+        eb,
+        text: 'Add',
+        listen: {
+          'newTodo': ({ current }, me) => {
+            if(current === null || current === undefined || current === '') {
+              me.disable()
+            } else {
+              me.activate()
+            }
+          }
+        },
+        onClick: () => {
+          eb.change('todoItems', (old) => {
+            old.push(eb.current('newTodo'))
+            eb.change('newTodo', () => '')
+            return old
+          })
+        }
+      })
+    },
+    {
+      mount: 'todo-items',
+      init: (eb) => TextBlock({
+        eb,
+        listen: ['todoItems'],
+        content: ({ todoItems }) => todoItems.map((item: any) => `${item}`).join(', '),
+      })
+    },
+  ]
 })
-
-// Initial state broadcast
-eb.store('VALUE', 0)
-eb.store('CHROMIUM_VERSION', process.versions.chrome)
-eb.store('ELECTRON_VERSION', process.versions.electron)

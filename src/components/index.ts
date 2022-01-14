@@ -1,12 +1,15 @@
-type Component = {
+import { EventBus } from '../eb/eb'
+
+export type BaseProps = {
+  eb: EventBus
+}
+
+export type Component = {
   node: HTMLElement
 }
 
-export type ComponentForge<T> = {
-  init: (props: T) => Component
+export type ComponentSpec = {
+  mount: string,
+  init: (eb: EventBus) => Component
+  listen?: any
 }
-
-export const addClass = ({ node }: Component, clazz: string) => node.classList.add(clazz)
-
-export const addClasses = (component: Component, ...clazz: string[]) => 
-  clazz.forEach(c => addClass(component, c))
